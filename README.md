@@ -16,7 +16,7 @@ The documentation for provider snap development is WIP and can be tracked at [th
 
 [//]: # (todo: update when published)
 
-# anatomy of snapcraft.yaml files
+# Installation
 
 If running on target device, once published, a provider snap can be installed and set up by running the following:
 
@@ -29,7 +29,7 @@ NB: the `fpgad:daemon-dbus` is external to this repo so may be subject to change
 Check [fpgad's snapcraft.yaml](https://github.com/canonical/fpgad/blob/main/snap/snapcraft.yaml) for changes if this
 command fails.
 
-## snapcraft.yaml explained
+# snapcraft.yaml files explained
 
 The `plugs` entry here allows the connection to be made between this snap and the fpgad daemon
 
