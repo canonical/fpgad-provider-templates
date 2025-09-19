@@ -1,0 +1,56 @@
+name: <provider-snap>
+base: core24 # core2* - should match Core image base version
+summary: <your summary here>
+description: |
+  <Your longer description here>
+grade: devel # or stable etc
+confinement: strict # must be strict for Ubuntu Core - can be devmode if for classical image
+plugs:
+  fpgad-dbus: # It is recommended to use `fpgad-dbus` as the name here, but it can be customized
+    interface: dbus
+    bus: system
+    name: com.canonical.fpgad
+  #<any other plugs you may need>:
+# slots: # this whole slot key is only necessary if using softeners. NOT DOCUMENTED YET
+#   fpgad-bitstreams:
+#     interface: content
+#     source:
+#       read:
+#         - $SNAP/data/<name of snap>/ # can be anything, but must match the bitstream data directories
+apps:
+  # if <provider-snap> == <provider-app> then this will be aliased as `<provider-snap>` from commandline, otherwise it is
+  # called like `<provider-snap>.<provider-app>`
+  <provider-app>:
+    command: bin/<provider-app>
+    daemon: oneshot # run once on startup
+    plugs:
+      - fpgad-dbus
+      - ... # any other necessary plugs
+    restart-condition: <always> # optional
+    start-timeout: <30s> # not optional if restart-condition specified
+    # if enabled, it will try and run the binary before the plug is connected, and install will fail
+    # see the `snap/hooks` directory for examples on how to enable on startup automatically on connection.
+    install-mode: disable
+parts:
+  # The version part here is just an example of how the version can be customised.
+  # See https://documentation.ubuntu.com/snapcraft/stable/how-to/crafting/add-a-snap-configuration/ for more
+  version:
+    plugin: nil
+    source: .
+    build-snaps:
+      - jq
+    override-pull: |
+      craftctl default
+      custom_version=$(...) # e.g. get cargo version
+      craftctl set version="$custom_version+git$(date +'%Y%m%d').$(git describe --always --exclude '*')"
+  <provider-app>:
+    plugin: <plugin> # see documentation.ubuntu.com/snapcraft/stable/how-to/integrations/ for information on building inside a snap
+    source: <relative/path/to/source>
+    # ... any other build related settings
+  bitstream-data: # this name can be customised
+    plugin: dump # means to provide data as is
+    source: ./data # relative to project root
+    source-type: local
+    organize:
+      <provider-snap>: data/<provider-snap> # copies contents of ./data/<provider-snap> to $SNAP_DATA/data/<provider-snap>
+      # <other-source-dirs>: <other target dirs>
