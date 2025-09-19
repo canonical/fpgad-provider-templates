@@ -8,7 +8,7 @@ in the following table.
 |-------------------------|--------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|
 | Firmware source type    | packs firmware files from a git repository into the snap                                                                 | packs firmware files from a local project subdirectory into the snap                                           |
 | Firmware load mechanism | uses a .dtbo device tree overlay file to trigger the firmware load to the FPGA device, and changes device tree structure | Directly writes the bitstream path to the FPGA manager which then loads to the device - no device tree changes |
-| How to run              | The loading of the dtbo must be initiated manually by running <provider-snap>.<provider-app> in cmdline                  | The application is automatically run once during boot - requires connection hooks                              |
+| How to run              | The loading of the dtbo must be initiated manually by running `<provider-snap>.<provider-app>` in cmdline                | The application is automatically run once during boot - requires connection hooks                              |
 
 # Relevant documentation
 
