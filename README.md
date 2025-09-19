@@ -81,7 +81,7 @@ parts:
 ```
 
 Here `version` just runs a simple script to generate a unique version string, `<provider-app>` part defines how to build
-the rust package which creates the `bin/k26-default-bitstreams` used in the app section and `bitstream-data` is a "dump"
+the binary from source (which creates the `bin/<provider-app>` file used in the app section, and `bitstream-data` is a "dump"
 of local or remote files into the snap data. Unfortunately, there is no good documentation about the dump plugin at time
 of writing. Hopefully the two provided examples provide enough of an example of how it can be used.
 
