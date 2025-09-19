@@ -10,6 +10,12 @@ in the following table.
 | Firmware load mechanism | uses a .dtbo device tree overlay file to trigger the firmware load to the FPGA device, and changes device tree structure | Directly writes the bitstream path to the FPGA manager which then loads to the device - no device tree changes |
 | How to run              | The loading of the dtbo must be initiated manually by running `<provider-snap>.<provider-app>` in cmdline                | The application is automatically run once during boot - requires connection hooks                              |
 
+# Examples
+
+Please see the following links for examples of different working implementations:
+- [k26-default-bitstreams](https://github.com/canonical/k26-default-bitstreams/) - an example of a provider snap for a Xilinx provided bitstream for K*26 series of Kria devices written in rust
+- [k24-default-bitstreams](https://github.com/canonical/k24-default-bitstreams/) - an example of a provider snap for a Xilinx provided bitstream for K*24 series of Kria devices written in C++
+
 # Relevant documentation
 
 The documentation for provider snap development is WIP and can be tracked at [this WIP fork](https://github.com/artiepoole/ubuntu-core-docs/tree/artie/fpga/docs/embedded-applications) for now.
